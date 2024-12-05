@@ -1,4 +1,4 @@
 #include "Display.hpp"
 
-// Инициализация статического указателя
+// init static pointer
 TFT_ILI9163C* Display::_instance = nullptr;

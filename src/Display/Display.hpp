@@ -27,5 +27,4 @@ public:
     static const int width = 128;
 };
 
-
 #endif
