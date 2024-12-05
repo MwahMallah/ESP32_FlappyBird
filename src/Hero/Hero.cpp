@@ -6,8 +6,8 @@ void Hero::update() {
     velocity += g;
 
     // check for collision at the bottom
-    if (y >= dispWidth - heroBitmapHeight) {
-        y = dispWidth - heroBitmapHeight; 
+    if (y >= Display::width - heroBitmapHeight) {
+        y = Display::width - heroBitmapHeight; 
         velocity = 0;                      
     }
 
@@ -45,7 +45,6 @@ void Hero::clear() {
         _disp.fillRect(x, y, heroBitmapWidth, aboveHillHeight, BG);
         _disp.fillRect(x, hillY, heroBitmapWidth, belowHillHeight, GREEN);
     }
-
 }
 
 void Hero::jump() {

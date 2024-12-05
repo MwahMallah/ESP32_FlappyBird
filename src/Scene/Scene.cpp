@@ -19,7 +19,7 @@ void Scene::draw() {
 void Scene::showMessage(String msg) {
     int charPixelWidth = 6;
     int size = 1;
-    disp.setCursor(dispWidth / 2 - (msg.length() / 2) * charPixelWidth * size, dispHeight / 2); 
+    disp.setCursor(Display::width / 2 - (msg.length() / 2) * charPixelWidth * size, Display::height / 2); 
     disp.setTextSize(size); 
     disp.setTextColor(WHITE); 
     disp.print(msg); 
