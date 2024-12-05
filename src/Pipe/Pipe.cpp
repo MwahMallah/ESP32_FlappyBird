@@ -8,19 +8,28 @@ void Pipe::clear() {
     if (x - width / 2 >= Display::width)
         return;
 
+    int leftPipeWallX = x - width / 2;
+    int visiblePipeWidth = leftPipeWallX > 0 ? width : width + leftPipeWallX;
+    int startX = leftPipeWallX > 0 ? leftPipeWallX : 0;
+
+    if (visiblePipeWidth <= 0) 
+        return;
+
     //fill upper part
     const int upperSize = y - size / 2;
-    disp.fillRect(x - width / 2, 0, width, upperSize, BG);
+    disp.fillRect(startX, 0, visiblePipeWidth, upperSize, BG);
 
     //fill down part
     const int downY = y + size / 2;
     const int downSize = downY - Display::height;
 
-    int16_t aboveHillHeight = hillY - downY; //hero height above the hill
-    int16_t belowHillHeight = Display::height - hillY; //hero height below the hill
+    //pipe height above the hill
+    int16_t aboveHillHeight = hillY - downY; 
+    //pipe height below the hill
+    int16_t belowHillHeight = Display::height - hillY + 1; 
 
-    disp.fillRect(x, downY, width, aboveHillHeight, BG);
-    disp.fillRect(x, hillY, width, belowHillHeight, GREEN);
+    disp.fillRect(startX, downY, visiblePipeWidth, aboveHillHeight, BG);
+    disp.fillRect(startX, hillY, visiblePipeWidth, belowHillHeight, GREEN);
 }
 
 void Pipe::draw() {
@@ -28,11 +37,23 @@ void Pipe::draw() {
         return;
 
     //fill upper part
+    int leftPipeWallX = x - width / 2;
+    int visiblePipeWidth = leftPipeWallX > 0 ? width : width + leftPipeWallX;
+    int startX = leftPipeWallX > 0 ? leftPipeWallX : 0;
+
+    if (visiblePipeWidth <= 0) 
+        return;
+
     const int upperSize = y - size / 2;
-    disp.fillRect(x - width / 2, 0, width, upperSize, PIPE);
+    disp.fillRect(startX, 0, visiblePipeWidth, upperSize, PIPE);
 
     //fill down part
     const int downY = y + size / 2;
     const int downSize = Display::height - downY;
-    disp.fillRect(x - width / 2, downY, width, downSize, PIPE);
+    disp.fillRect(startX, downY, visiblePipeWidth, downSize, PIPE);
+}
+
+bool Pipe::isVisible() {
+    int rightPipeWallX = x + width / 2;
+    return rightPipeWallX > 0;
 }

@@ -33,6 +33,7 @@ public:
     void update();
     void draw();
     void clear();
+    bool isVisible();
 };
 
 #endif
