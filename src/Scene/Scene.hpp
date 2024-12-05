@@ -15,7 +15,8 @@
 class Scene {
     TFT_ILI9163C& disp;
     Hero& _hero;
-    std::vector<Pipe> pipes;
+    std::vector<Pipe*> pipes;
+    void remove_unvisible_pipes();
 public:
     //initialize tft display in constructor
     Scene(Hero& hero) : disp(Display::getInstance()), _hero(hero)

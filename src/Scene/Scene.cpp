@@ -2,10 +2,10 @@
 
 void Scene::init() {
     disp.fillScreen(CYAN);
-    disp.fillRect(0, hillY, Display::width, Display::height - hillY, GREEN);
+    disp.fillRect(0, hillY, Display::width + 2, Display::height - hillY + 1, GREEN);
     _hero.draw();
 
-    pipes.push_back(Pipe());
+    pipes.emplace_back(new Pipe());
 }
 
 void Scene::update() {
@@ -14,9 +14,24 @@ void Scene::update() {
     _hero.draw();
 
     for (auto& pipe : pipes) {
-        pipe.clear();
-        pipe.update();
-        pipe.draw();
+        pipe->clear();
+        pipe->update();
+        pipe->draw();
+    }
+
+    remove_unvisible_pipes();
+}
+
+void Scene::remove_unvisible_pipes() {
+    for (auto it = pipes.begin(); it != pipes.end();) {
+        if (!(*it)->isVisible()) {
+            delete *it;         // delete unvisible pipe
+            it = pipes.erase(it);  // delete from vector
+            Serial.println("Erased pipe");
+            Serial.printf("Pipes length: %zu\n", pipes.size());  
+        } else {
+            ++it;
+        }
     }
 }
 
@@ -24,8 +39,7 @@ void Scene::draw() {
     _hero.draw();
     
     for (auto& pipe : pipes) {
-        pipe.update();
-        pipe.draw();
+        pipe->draw();
     }
 }
 
