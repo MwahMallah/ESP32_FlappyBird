@@ -9,9 +9,6 @@
 #define DC    2   // Data/Command pin
 #define RESET 4   // Reset pin
 
-const int dispHeight = 128;
-const int dispWidth = 128;
-
 //Singleton class for display
 class Display {
     static TFT_ILI9163C* _instance;
@@ -25,6 +22,9 @@ public:
         }
         return *_instance;
     }
+
+    static const int height = 128;
+    static const int width = 128;
 };
 
 
