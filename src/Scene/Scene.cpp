@@ -2,18 +2,31 @@
 
 void Scene::init() {
     disp.fillScreen(CYAN);
-    disp.fillRect(0, hillY, dispWidth, dispHeight - hillY, GREEN);
+    disp.fillRect(0, hillY, Display::width, Display::height - hillY, GREEN);
     _hero.draw();
+
+    pipes.push_back(Pipe());
 }
 
 void Scene::update() {
     _hero.clear();
     _hero.update();
     _hero.draw();
+
+    for (auto& pipe : pipes) {
+        pipe.clear();
+        pipe.update();
+        pipe.draw();
+    }
 }
 
 void Scene::draw() {
     _hero.draw();
+    
+    for (auto& pipe : pipes) {
+        pipe.update();
+        pipe.draw();
+    }
 }
 
 void Scene::showMessage(String msg) {
