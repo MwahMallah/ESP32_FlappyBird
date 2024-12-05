@@ -50,3 +50,13 @@ void Hero::clear() {
 void Hero::jump() {
     velocity -= jmpVelocity;
 }
+
+int Hero::getCenterX()
+{
+    return x + heroBitmapWidth / 2;
+}
+
+int Hero::getCenterY()
+{
+    return y + heroBitmapHeight / 2;
+}

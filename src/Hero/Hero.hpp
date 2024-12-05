@@ -55,16 +55,18 @@ class Hero {
     TFT_ILI9163C& _disp;
     const int heroBitmapHeight = 12;
     const int heroBitmapWidth = 18;
-    const double jmpVelocity = 1.5;
+    const double jmpVelocity = 3.2;
     double velocity;
 public:
-    Hero() : x(10), y(50), _disp(Display::getInstance()), velocity(0), g(0.3), animationNum(0)
+    Hero() : x(10), y(50), _disp(Display::getInstance()), velocity(0), g(0.6), animationNum(0)
         {}
     void update();
     void draw();
     void clear();
     void jump();
     double currSpeed() {return velocity;}
+    int getCenterX();
+    int getCenterY();
 }; 
 
 #endif
