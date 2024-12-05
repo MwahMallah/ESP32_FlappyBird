@@ -15,10 +15,16 @@ class Pipe {
     int size;
     int pipeSpeed;
     TFT_ILI9163C& disp;
+    bool heroScored;
+
+    //checks if other's object x is in pipes area
+    bool inHorizontalArea(int x);
+    //checks if other's object y is in pipes score area
+    bool inVerticalScoreArea(int y);
 public:
-    Pipe() : disp(Display::getInstance()), width(10) {
-        const int minDeltaY = 30;
-        const int maxDeltaY = 30; 
+    Pipe() : disp(Display::getInstance()), width(10), heroScored(false) {
+        const int minDeltaY = 40;
+        const int maxDeltaY = 40; 
 
         const int minSize = 45;
         const int maxSize = 90;
@@ -34,6 +40,8 @@ public:
     void draw();
     void clear();
     bool isVisible();
+    bool scored(int x, int y);
+    bool collided(int x, int y);
 };
 
 #endif

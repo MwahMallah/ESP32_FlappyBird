@@ -1,6 +1,7 @@
 #include "Pipe.hpp"
 
-void Pipe::update() {
+void Pipe::update()
+{
     x -= pipeSpeed;
 }
 
@@ -56,4 +57,43 @@ void Pipe::draw() {
 bool Pipe::isVisible() {
     int rightPipeWallX = x + width / 2;
     return rightPipeWallX > 0;
+}
+
+bool Pipe::collided(int otherX, int otherY)
+{
+    bool inHorizontal = inHorizontalArea(otherX);
+    bool inVertical = !inVerticalScoreArea(otherY);
+
+    if (inHorizontal && inVertical) {
+        return true;
+    }
+
+    return false;
+}
+
+bool Pipe::scored(int otherX, int otherY)
+{
+    if (heroScored) 
+        return false;
+
+    bool inHorizontal = inHorizontalArea(otherX);
+    bool inVertical = inVerticalScoreArea(otherY);
+
+    if (inHorizontal && inVertical) {
+        heroScored = true;
+        return true;
+    }
+
+    return false;
+}
+
+
+bool Pipe::inHorizontalArea(int otherX)
+{
+    return (otherX >= x - width / 2) && (otherX <= x + width / 2);
+}
+
+bool Pipe::inVerticalScoreArea(int otherY)
+{
+    return (otherY >= y - size / 2) && (otherY <= y + size / 2);
 }
